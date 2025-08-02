@@ -1,0 +1,13 @@
+name: Bounty
+version: '1.0'
+description: "bounty plugin for survival server"
+main: net.wispwood.bounty.Bounty
+api-version: '1.21'
+author: "Aduhkiss"
+depend: ["Vault"]
+commands:
+  bounty:
+    permission: bounty.bounty
+permissions:
+  bounty.bounty:
+    default: true

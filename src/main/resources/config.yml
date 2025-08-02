@@ -1,0 +1,9 @@
+bounty:
+  # If the target of the bounty needs to be online
+  targetMustBeOnline: false
+
+playerHeads:
+  # If there is a chance for their head to drop after killing them
+  canDrop: true
+  # The percentage chance for the head to drop
+  dropChance: 0.05 # for 5% drop chance
