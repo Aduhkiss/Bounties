@@ -21,6 +21,12 @@ import java.util.UUID;
 public class BountiesManager {
     private static List<Hit> _PlacedHits = new ArrayList<>();
 
+    /**
+     * Adds a bounty to whatever storage method the server is using.
+     * @param caller The player who is placing the bounty
+     * @param target The player who is having a bounty placed on them
+     * @param amount The amount the killer will get for killing this player
+     */
     public static void addBounty(Player caller, OfflinePlayer target, double amount) {
         _PlacedHits.add(new Hit(caller, target, amount));
     }

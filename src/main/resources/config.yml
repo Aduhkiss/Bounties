@@ -1,6 +1,8 @@
 bounty:
   # If the target of the bounty needs to be online
   targetMustBeOnline: false
+  # If we tell the target that they had a bounty placed on them
+  sendMessageToTarget: true
 
 playerHeads:
   # If there is a chance for their head to drop after killing them

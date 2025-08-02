@@ -51,16 +51,21 @@ public class BountyCmd implements CommandExecutor {
                 return false;
             }
         }
-
+        if(((Player) sender).getUniqueId() == target.getUniqueId()) {
+            sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "error_cannot_bounty_yourself"
+            ));
+            return false;
+        }
 
         BountiesManager.addBounty((Player) sender, target, amount);
-        //sender.sendMessage("§6You placed a bounty on " + target.getName() + " for $" + amount + "!");
+
         sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
                 "success_bounty_placed",
                 "%target%", target.getName(),
                 "%amount%", String.valueOf(amount)
         ));
-        if(target.isOnline()) {
+        if(target.isOnline() && Bounty.getInstance().getConfig().getBoolean("bounty.sendMessageToTarget")) {
             ((Player) target).sendMessage(Bounty.getInstance().getMessages().getMessage(
                     "bounty_placed_on_me",
                     "%amount%", String.valueOf(amount),

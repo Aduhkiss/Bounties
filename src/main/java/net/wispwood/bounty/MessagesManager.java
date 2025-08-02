@@ -20,7 +20,7 @@ public class MessagesManager {
         messagesFile = new File(Bounty.getInstance().getDataFolder(), "messages.yml");
 
         if(!messagesFile.exists()) {
-            Bukkit.getLogger().info("messages.yml does not exist! Creating one...");
+            Bukkit.getLogger().info("[BountyPlus] messages.yml does not exist! Creating one...");
             Bounty.getInstance().saveResource("messages.yml", false); // just copy the default file from the jar
         }
 
