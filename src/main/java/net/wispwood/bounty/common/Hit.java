@@ -2,6 +2,13 @@ package net.wispwood.bounty.common;
 
 import org.bukkit.OfflinePlayer;
 
+/**
+ * Blueprint for how bounties work on the back-end. This is used to make it easier to convert
+ * between storing hits in ram, as yaml, or in a database
+ * @author Atticus Zambrana
+ * @since 1.0
+ */
+
 public class Hit {
     private OfflinePlayer caller;
     private OfflinePlayer target;

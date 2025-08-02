@@ -8,6 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+
+/**
+ * Handles all Bounty/Hit related logic for the server.
+ *
+ * This class handles placing, claiming, and keeping track of bounties.
+ * It interfaces with the databases/memory and provides helper methods for commands and events.
+ *
+ * @Author Atticus Zambrana
+ * @since 1.0
+ */
 public class BountiesManager {
     private static List<Hit> _PlacedHits = new ArrayList<>();
 

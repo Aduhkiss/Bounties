@@ -22,7 +22,14 @@ public class BountyHandler implements Listener {
         if(BountiesManager.hasHit(ev.getEntity())) {
             Hit hit = BountiesManager.getHit(ev.getEntity());
             Bounty.getEcon().depositPlayer(killer, hit.getAmount());
-            killer.sendMessage("§bYou received §c$" + hit.getAmount() + " §bfor killing §c" + ev.getEntity().getName() + "§b!");
+            //killer.sendMessage("§bYou received §c$" + hit.getAmount() + " §bfor killing §c" + ev.getEntity().getName() + "§b!");
+
+            killer.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "bounty_claimed_message",
+                    "%hit_amount%", String.valueOf(hit.getAmount()),
+                    "%hit_target%", ev.getEntity().getName()
+            ));
+
             BountiesManager.removeBounty(ev.getEntity());
 
             if(Bounty.getInstance().getConfig().getBoolean("playerHeads.canDrop")) {
@@ -30,7 +37,10 @@ public class BountyHandler implements Listener {
                     ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                     SkullMeta meta = (SkullMeta) head.getItemMeta();
                     meta.setOwningPlayer(ev.getEntity());
-                    meta.setDisplayName("§e" + ev.getEntity().getName() + "'s Head");
+                    meta.setDisplayName(Bounty.getInstance().getMessages().getMessage(
+                            "skull_itemstack_name",
+                            "%playername%", ev.getEntity().getName())
+                    );
                     head.setItemMeta(meta);
 
                     killer.getWorld().dropItemNaturally(ev.getPlayer().getLocation(), head);

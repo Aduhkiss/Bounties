@@ -14,12 +14,16 @@ public class BountyCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] args) {
         if((!(sender instanceof Player))) {
-            sender.sendMessage("§cYou must be a player to run this.");
+            sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "error_sender_isnt_a_player"
+            ));
             return false;
         }
 
         if(args.length != 2) {
-            sender.sendMessage("§cUsage: /bounty <Player> <Amount>");
+            sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "bounty_command_usage"
+            ));
             return false;
         }
         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
@@ -27,26 +31,41 @@ public class BountyCmd implements CommandExecutor {
         try {
             amount = Double.parseDouble(args[1]);
         } catch(IllegalArgumentException ex) {
-            sender.sendMessage("§cThat is not a number!");
+            sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "error_not_a_number"
+            ));
             return false;
         }
 
         if(Bounty.getEcon().getBalance((OfflinePlayer) sender) < amount) {
-            sender.sendMessage("§cYou don't have enough money!");
+            sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "error_not_enough_money"
+            ));
             return false;
         }
         if(Bounty.getInstance().getConfig().getBoolean("bounty.targetMustBeOnline")) {
             if(!target.isOnline()) {
-                sender.sendMessage("§cThat player is not online right now!");
+                sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                        "error_target_not_online"
+                ));
                 return false;
             }
         }
 
 
         BountiesManager.addBounty((Player) sender, target, amount);
-        sender.sendMessage("§6You placed a bounty on " + target.getName() + " for $" + amount + "!");
+        //sender.sendMessage("§6You placed a bounty on " + target.getName() + " for $" + amount + "!");
+        sender.sendMessage(Bounty.getInstance().getMessages().getMessage(
+                "success_bounty_placed",
+                "%target%", target.getName(),
+                "%amount%", String.valueOf(amount)
+        ));
         if(target.isOnline()) {
-            ((Player) target).sendMessage("§bYou have had a bounty placed on you by §c" + sender.getName() + "§b for §c$" + amount + "§b!");
+            ((Player) target).sendMessage(Bounty.getInstance().getMessages().getMessage(
+                    "bounty_placed_on_me",
+                    "%amount%", String.valueOf(amount),
+                    "%attacker%", sender.getName()
+            ));
         }
         Bounty.getEcon().withdrawPlayer((OfflinePlayer) sender, amount);
 

@@ -1,6 +1,6 @@
-name: Bounty
+name: BountyPlus
 version: '1.0'
-description: "bounty plugin for survival server"
+description: "Place bounties/hits on other players"
 main: net.wispwood.bounty.Bounty
 api-version: '1.21'
 author: "Aduhkiss"
@@ -8,6 +8,11 @@ depend: ["Vault"]
 commands:
   bounty:
     permission: bounty.bounty
+  bountyreload:
+    description: Reload the configuration and messages
+    permission: bounty.bountyreload
 permissions:
   bounty.bounty:
     default: true
+  bounty.bountyreload:
+    default: op
