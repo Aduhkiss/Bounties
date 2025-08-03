@@ -48,4 +48,17 @@ public class BountiesManager {
     public static boolean hasHit(Player target) {
         return getHit(target) != null;
     }
+
+    public static List<Hit> getHits() {
+        return _PlacedHits;
+    }
+    public static double getPooledHitPrice(OfflinePlayer target) {
+        double price = 0.00;
+        for(Hit h : getHits()) {
+            if(h.getTarget().getUniqueId() == target.getUniqueId()) {
+                price += h.getAmount();
+            }
+        }
+        return price;
+    }
 }

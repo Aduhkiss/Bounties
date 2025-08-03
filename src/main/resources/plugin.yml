@@ -1,18 +1,28 @@
 name: BountyPlus
 version: '1.0'
 description: "Place bounties/hits on other players"
-main: net.wispwood.bounty.Bounty
+main: net.wispwood.bounty.BP
 api-version: '1.21'
 author: "Aduhkiss"
 depend: ["Vault"]
 commands:
   bounty:
-    permission: bounty.bounty
+    permission: bounty.cmd.bounty
   bountyreload:
     description: Reload the configuration and messages
-    permission: bounty.bountyreload
+    permission: bounty.cmd.reload
+  bountytop:
+    description: View a list of all players with a bounty
+    permission: bounty.cmd.top
+  bountyposter:
+    description: Give yourself a wanted poster for someone with a bounty
+    permission: bounty.cmd.poster
 permissions:
-  bounty.bounty:
+  bounty.cmd.bounty:
     default: true
-  bounty.bountyreload:
+  bounty.cmd.reload:
+    default: op
+  bounty.cmd.top:
+    default: true
+  bounty.cmd.poster:
     default: op

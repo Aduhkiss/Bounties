@@ -4,6 +4,12 @@ bounty:
   # If we tell the target that they had a bounty placed on them
   sendMessageToTarget: true
 
+limits:
+  # Allows you to set a minimum bounty price. Set to -1 to disable
+  minimum_bounty: -1
+  # Allows you to set a maximum bounty price. Set to -1 to disable
+  maximum_bounty: -1
+
 playerHeads:
   # If there is a chance for their head to drop after killing them
   canDrop: true

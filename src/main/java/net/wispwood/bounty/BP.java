@@ -2,14 +2,17 @@ package net.wispwood.bounty;
 
 import net.milkbowl.vault.economy.Economy;
 import net.wispwood.bounty.cmd.BountyCmd;
+import net.wispwood.bounty.cmd.PosterCmd;
 import net.wispwood.bounty.cmd.ReloadCmd;
-import net.wispwood.bounty.listeners.BountyHandler;
+import net.wispwood.bounty.cmd.TopCmd;
+import net.wispwood.bounty.listeners.gameplay.BountyHandler;
+import net.wispwood.bounty.listeners.gui.TopGuiListener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Bounty extends JavaPlugin {
+public final class BP extends JavaPlugin {
 
-    private static Bounty instance;
+    private static BP instance;
     private static Economy econ;
     private MessagesManager messages;
 
@@ -30,8 +33,11 @@ public final class Bounty extends JavaPlugin {
 
         getCommand("bounty").setExecutor(new BountyCmd());
         getCommand("bountyreload").setExecutor(new ReloadCmd());
+        getCommand("bountytop").setExecutor(new TopCmd());
+        getCommand("bountyposter").setExecutor(new PosterCmd());
 
         getServer().getPluginManager().registerEvents(new BountyHandler(), this);
+        getServer().getPluginManager().registerEvents(new TopGuiListener(), this);
     }
     public MessagesManager getMessages() {
         return messages;
@@ -42,7 +48,7 @@ public final class Bounty extends JavaPlugin {
         // Plugin shutdown logic
         instance = null;
     }
-    public static Bounty getInstance() {
+    public static BP getInstance() {
         return instance;
     }
 

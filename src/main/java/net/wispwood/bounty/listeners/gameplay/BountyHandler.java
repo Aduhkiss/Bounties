@@ -1,7 +1,7 @@
-package net.wispwood.bounty.listeners;
+package net.wispwood.bounty.listeners.gameplay;
 
 import net.wispwood.bounty.BountiesManager;
-import net.wispwood.bounty.Bounty;
+import net.wispwood.bounty.BP;
 import net.wispwood.bounty.common.Hit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,10 +21,10 @@ public class BountyHandler implements Listener {
 
         if(BountiesManager.hasHit(ev.getEntity())) {
             Hit hit = BountiesManager.getHit(ev.getEntity());
-            Bounty.getEcon().depositPlayer(killer, hit.getAmount());
+            BP.getEcon().depositPlayer(killer, hit.getAmount());
             //killer.sendMessage("§bYou received §c$" + hit.getAmount() + " §bfor killing §c" + ev.getEntity().getName() + "§b!");
 
-            killer.sendMessage(Bounty.getInstance().getMessages().getMessage(
+            killer.sendMessage(BP.getInstance().getMessages().getMessage(
                     "bounty_claimed_message",
                     "%hit_amount%", String.valueOf(hit.getAmount()),
                     "%hit_target%", ev.getEntity().getName()
@@ -32,12 +32,12 @@ public class BountyHandler implements Listener {
 
             BountiesManager.removeBounty(ev.getEntity());
 
-            if(Bounty.getInstance().getConfig().getBoolean("playerHeads.canDrop")) {
-                if(r.nextDouble() <= Bounty.getInstance().getConfig().getDouble("playerHeads.dropChance")) {
+            if(BP.getInstance().getConfig().getBoolean("playerHeads.canDrop")) {
+                if(r.nextDouble() <= BP.getInstance().getConfig().getDouble("playerHeads.dropChance")) {
                     ItemStack head = new ItemStack(Material.PLAYER_HEAD);
                     SkullMeta meta = (SkullMeta) head.getItemMeta();
                     meta.setOwningPlayer(ev.getEntity());
-                    meta.setDisplayName(Bounty.getInstance().getMessages().getMessage(
+                    meta.setDisplayName(BP.getInstance().getMessages().getMessage(
                             "skull_itemstack_name",
                             "%playername%", ev.getEntity().getName())
                     );
